@@ -2,6 +2,7 @@ Cześć, jeśli otworzyłeś/aś ten plik to znaczy, że nie jesteś tu przez pr
 
 
 /////////////////////////////////////////////////////////////////////////////////
+
 Mam na imię Piotr, a to REPOZYTORIUM stworzyłem aby zgromadzić i udokumentować swoją wiedzę techniczną z zakresu języka Java Script. 
 
 Jestem pełnym pasji samoukiem, który każdą wolną chwile poświeca na naukę i rozwiązywanie kolejnych problemów które pojawiają sie w trakcie nauki i rodzą sie w głowie.
