@@ -182,38 +182,212 @@ console.log(friends.indexOf("Peter"));
 
  //////////////////////////////////////////////
  // Coding Challenge 2 !!!
-
-/*  const bills = [125, 555, 44];
- function tip(bills){
-     if(bills >= 50 && bills <= 300){
-         bills * 0.15
-        return;
-     }else
-     bills * 0.2;
-     return;
- }
-
- const tip1 = tip(125);
-console.log(tip1);
-
-const totals = [bills[0] +tips[0], bills[1] +tips[1], bills[2] +tips[2]];
-
-console.log(bills);
-console.log(tips);
-console.log(totals); 
-*/
+/* 
 const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
 const bills = [125, 555, 44];
 
 const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 const totals = [bills[0] +tips[0], bills[1] +tips[1], bills[2] +tips[2]];
-
-  
-  // const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
-  
- 
-  // my coment in github
-  
   
   console.log(bills, tips, totals);
   
+ */
+
+//////////////////////////////////////////
+// Objects
+/* 
+const piotr = {
+    firstName: 'Piotr',
+    lastName: 'Potrac',
+    birthYear: 1993,
+    job: 'Front dev',
+    friends: ['Micheal', 'Stev', "Karl"],
+    hasDriverLicens: false,
+/* 
+    calcAge: function(birthYear) {                 // Methods
+        return 2022 - birthYear;
+    } */
+/* 
+    calcAge: function() {                 // Methods
+       // console.log(this);   
+       this.age = 2022 - this.birthYear;
+        return this.age;
+    },
+
+    getSummary: function(){
+    const sum = `${this.firstName} is a ${this.calcAge()}-years old ${this.job}, and he has ${this.hasDriverLicens ? "a dirver license": "no a drivers licence"}`;
+        return sum;
+    }
+};
+
+const nameKey = 'Name';
+console.log(piotr.firstName);
+console.log(piotr['firstName']);
+console.log(piotr["first" + nameKey]);
+
+piotr.location = "Poland";
+
+console.log(piotr); */
+// console.log(`${piotr.firstName} has ${piotr.friends.length} friends, and the best one called ${piotr.friends[1]}`);
+
+///////////////////////////////////////
+// Objects methods
+/* 
+console.log(piotr.calcAge(1993));
+console.log(piotr.calcAge());
+console.log(piotr.calcAge(piotr.birthYear));
+console.log(piotr['calcAge'](1993));
+console.log(piotr.getSummary());
+
+ */
+
+/////////////////////////////
+// Coding challenege 3
+/* 
+const mark = {
+    name: 'Mark Miller',
+    mass: 78,
+    heigth: 1.69,
+
+    calcBMI: function(){
+        this.BMI = this.mass / this.heigth **2;
+        return this.BMI;
+    }
+    
+};
+
+
+const john = {
+    name: 'John Smith',
+    mass: 92,
+    heigth: 1.95,
+
+    calcBMI: function(){
+        this.BMI = this.mass / this.heigth **2;
+        return this.BMI;
+    }
+    
+};
+console.log(mark.calcBMI());
+console.log(mark);
+
+console.log(john.calcBMI());
+console.log(john);
+
+
+if(mark.calcBMI() > john.calcBMI()){
+    console.log(`${mark.name} BMI (${mark.BMI}) is higher than ${john.name} BMI (${john.BMI})`);
+}else if(john.calcBMI() > mark.calcBMI()){
+    console.log(`${john.name} BMI (${john.BMI}) is higher than ${mark.name} BMI (${mark.BMI})`);
+} */
+
+//////////////////////////////////
+//  -------------Loops------------------
+//    for loop
+/* 
+for(let i = 1; i <=10; i++){
+    console.log(`Lifting weights repetition ${i}`);
+}
+
+ */
+
+// exercise
+/* 
+const piotr = ['Piotr', 'Potrac', 2022 - 1993, "front dev", ["mike", "karl", "brad"], true];
+const types = [];
+
+for(let i = 0; i < piotr.length; i++){
+    types.push(typeof piotr[i]);
+    //types[i] = typeof(piotr[i]);
+ }
+
+console.log(types);
+
+
+const years  = [1991, 2007, 1969, 2020];
+const ages =  [];
+
+for(let  i = 0; i < years.length; i++){
+ages.push(2037 - years[i]);
+}
+ console.log(ages);
+
+ // continue 
+ for (let i = 0; i < piotr.length; i++){
+     if(typeof piotr[i] !== "string"){ 
+         continue;                     // it finish a current iteration of loop and go to next one
+    }
+console.log(piotr[i], typeof piotr[i]);
+ }
+
+ //  break and backward 
+ for (let i = piotr.length - 1; i >= 0; i--){
+    if(typeof piotr[i] === "number"){ 
+    break;                     // it finish a loop  !!!!!!!!!!!!!!!!!!!!
+   }
+console.log(piotr[i], typeof piotr[i]);
+}
+
+ */
+//////////////////////////////////////////
+// loop in loop
+/* 
+for(let exercise = 1; exercise < 4; exercise++){
+    console.log(`----------- Starting exercise${exercise}`);
+
+    for (let rep = 1; rep < 6; rep++){
+        console.log(`lifting weigth repetition ${rep}`);
+    }
+
+}
+
+ */
+
+//////////////////////////////////
+//  While loop
+/* 
+for (let rep = 1; rep <= 10; rep++){
+    console.log(`Lifting weigth repetition ${rep}`);
+}
+
+console.log(`-----------While loop ----------------`);
+let rep = 1;
+while (rep <= 10) {
+    console.log(`Lifting weigth repetition ${rep}`);
+    rep++;
+
+}
+ */
+// example 2
+/* 
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while(dice !== 6 ){
+console.log(`You rolled ${dice}`);
+dice = Math.trunc(Math.random() * 6) + 1;
+} */
+
+////////////////////////////////
+// Coding chalenege 4 
+
+const calcAverage = function(arr){
+    let avg = 0;
+    for(let i = 0; i < arr.length; i++){
+        avg +=  arr[i] / arr.length;
+    }
+    return avg;
+}
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
+
+const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+
+for (let i = 0; i < bills.length; i++){
+    tips[i] = calcTip(bills[i]);
+    totals.push(bills[i] + tips[i]);
+}
+
+console.log(bills, tips, totals);
+console.log(calcAverage(bills));
+console.log(calcAverage(totals));
