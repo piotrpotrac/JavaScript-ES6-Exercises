@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 /* ////////////////////////////////////////
 //Function syntax
 
@@ -31,7 +29,6 @@ console.log(appleJuice);
 const orangeJuice = fruitProcess(0,7);
 console.log(orangeJuice); */
 
-
 /////////////////////////////////////////////////
 // Functions Declaretions vs. Expressions
 /* 
@@ -49,8 +46,8 @@ const calcAge2 = function(birthYear){
 
  console.log(age1, age2); */
 
- //////////////////////////////////
- // Arrow Functions      we dont need Return the function !!
+//////////////////////////////////
+// Arrow Functions      we dont need Return the function !!
 /* 
 const calcAge3 = birthYear => 2022 - birthYear;
 const age3 = calcAge3(1993);
@@ -111,7 +108,6 @@ checkWinnner(avgDolphins, avgKoalas); */
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 
-
 // ----------------ARRAYS----------------
 /* 
  const friends = ["Mike", "Peter", 'Derek'];
@@ -133,10 +129,10 @@ const firstName = "Piotr";
 
  console.log(piotr);
  */
- //////////////////////////////////////////////////////
- //Exercise
+//////////////////////////////////////////////////////
+//Exercise
 
- /* const calcAge = function (birthYear) {
+/* const calcAge = function (birthYear) {
      return 2037 - birthYear;
  }
 const years = [1990, 1967, 2002, 2010, 2018];
@@ -180,8 +176,8 @@ console.log(friends.indexOf("Peter"));
  console.log(friends.includes("Peter"));
  console.log(friends.includes("Jay")); */
 
- //////////////////////////////////////////////
- // Coding Challenge 2 !!!
+//////////////////////////////////////////////
+// Coding Challenge 2 !!!
 /* 
 const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
 const bills = [125, 555, 44];
@@ -332,15 +328,13 @@ console.log(piotr[i], typeof piotr[i]);
 //////////////////////////////////////////
 // loop in loop
 /* 
-for(let exercise = 1; exercise < 4; exercise++){
-    console.log(`----------- Starting exercise${exercise}`);
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`----------- Starting exercise${exercise}`);
 
-    for (let rep = 1; rep < 6; rep++){
-        console.log(`lifting weigth repetition ${rep}`);
-    }
-
+  for (let rep = 1; rep < 6; rep++) {
+    console.log(`lifting weigth repetition ${rep}`);
+  }
 }
-
  */
 
 //////////////////////////////////
@@ -368,24 +362,25 @@ dice = Math.trunc(Math.random() * 6) + 1;
 } */
 
 ////////////////////////////////
-// Coding chalenege 4 
+// Coding chalenege 4
 
-const calcAverage = function(arr){
-    let avg = 0;
-    for(let i = 0; i < arr.length; i++){
-        avg +=  arr[i] / arr.length;
-    }
-    return avg;
-}
+const calcAverage = function (arr) {
+  let avg = 0;
+  for (let i = 0; i < arr.length; i++) {
+    avg += arr[i] / arr.length;
+  }
+  return avg;
+};
 const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
 const tips = [];
 const totals = [];
 
-const calcTip = bill => bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+const calcTip = (bill) =>
+  bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
 
-for (let i = 0; i < bills.length; i++){
-    tips[i] = calcTip(bills[i]);
-    totals.push(bills[i] + tips[i]);
+for (let i = 0; i < bills.length; i++) {
+  tips[i] = calcTip(bills[i]);
+  totals.push(bills[i] + tips[i]);
 }
 
 console.log(bills, tips, totals);

@@ -19,7 +19,6 @@ console.log(piotr1);
 //////////////////////////////////////
 //Exercise 2
 
-
 // const massMark = 95;
 // const heightMark = 1.88;
 // const massJohn = 85;
@@ -35,7 +34,6 @@ console.log(piotr1);
 // console.log(`Mark's BMI (${Math.floor(BMIMark)}) is higher than John's (${Math.floor(BMIJohn)})!`);
 // else
 // console.log(`John's BMI (${BMIJohn.toFixed(2)}) is higher than Mark's (${Math.floor(BMIMark)})!`);
-
 
 /*
 ////////////////////////////////////////////
@@ -65,8 +63,6 @@ console.log(`You are born i XX century`);
 else
 console.log(`You are born in XXI century`); */
 
-
-
 /* const inputYear = "1991";
 
 console.log(Number(inputYear));
@@ -80,10 +76,8 @@ console.log("you are rich");
 else
 console.log("you are poor"); */
 
-
 ///////////////////////////////
 // IF else statement
-
 
 /* const scoreD1 = 97;
 const scoreD2 = 112;
@@ -138,6 +132,8 @@ const drink = age >= 18 ? console.log(`you are adult`) : console.log(`You are to
 //////////////////////////////
 //Exercise  4
 
-const bill = 430 ; 
+const bill = 430;
 const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
-console.log(`The bill was ${bill}, the tip was ${tip}, the total bill was ${bill + tip}`);
+console.log(
+  `The bill was ${bill}, the tip was ${tip}, the total bill was ${bill + tip}`
+);
