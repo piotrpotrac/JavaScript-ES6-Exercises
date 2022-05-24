@@ -10,15 +10,27 @@ const diceEl = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 const btnNew = document.querySelector('.btn--new');
 const btnHold = document.querySelector('.btn--hold');
-// Starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
 
-let currentScore = 0;
-let activePlayer = 0;
-let score = [0, 0];
-let playing = true;
+let currentScore;
+let activePlayer;
+let score;
+let playing;
+// Starting conditions
+const init = function () {
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--winner');
+  player1El.classList.remove('player--active');
+  currentScore = 0;
+  activePlayer = 0;
+  score = [0, 0];
+  playing = true;
+};
 
 //  console.log(score0El);
 
@@ -31,6 +43,8 @@ const switchPlayer = function () {
   player1El.classList.toggle('player--active');
 };
 
+// initialization the game atributes
+init();
 //Events
 
 // Roling dice function
@@ -63,7 +77,7 @@ btnHold.addEventListener('click', function () {
       score[activePlayer];
 
     // 2. check if player score > 100
-    if (score[activePlayer] >= 20) {
+    if (score[activePlayer] >= 100) {
       playing = false;
       document
         .querySelector(`.player--${activePlayer}`)
@@ -80,17 +94,4 @@ btnHold.addEventListener('click', function () {
   }
 });
 
-btnNew.addEventListener('click', function () {
-  score0El.textContent = 0;
-  score1El.textContent = 0;
-  diceEl.classList.add('hidden');
-
-  let currentScore = 0;
-  let activePlayer = 0;
-  let score = [0, 0];
-  let playing = true;
-  player0El.classList.remove('player--winner');
-  player1El.classList.remove('player--winner');
-  document.getElementById(`current--1`).textContent = 0;
-  document.getElementById(`current--0`).textContent = 0;
-});
+btnNew.addEventListener('click', init);
