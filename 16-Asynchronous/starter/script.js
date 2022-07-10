@@ -178,7 +178,7 @@ TEST COORDINATES 2: -33.933, 18.474
 GOOD LUCK 😀
 */
 
-const whereAmI = function (lat, lng) {
+/* const whereAmI = function (lat, lng) {
   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
     .then(res => {
       if (!res.ok)
@@ -208,3 +208,63 @@ const whereAmI = function (lat, lng) {
 // whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
+ */
+
+////////////////////////////////////////
+// Event Loop in practice
+/* 
+console.log('Test start');
+
+setTimeout(() => console.log('0 sec timer'), 0);
+
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+Promise.resolve('Resolved promise 2').then(res => {
+  for (let i = 0; i < 10000000; i++) {}
+  console.log(res);
+});
+console.log('Test end!');
+ */
+
+//////////////////////////////////////
+// Bulding a Promise
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You Win 💰');
+    } else {
+      reject(new Error('You LOOOSE!! 💩'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+// Promisyfying
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+wait(1)
+  .then(() => {
+    console.log('I waited for 1 sec.');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('I waited for 2 sec.');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('I waited for 3 sec.');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('I waited for 4 sec.');
+    return wait(1);
+  })
+  .then(() => console.log('I waited for n sec'));
+
+Promise.resolve('abc').then(x => console.log(x));
+
+Promise.reject(new Error('Problem')).catch(x => console.error(x));
