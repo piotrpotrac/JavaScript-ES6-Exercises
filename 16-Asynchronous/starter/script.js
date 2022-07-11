@@ -33,12 +33,12 @@ const renderCountry = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
   countriesContainer.style.opacity = 1;
 };
-btn.style.opacity = 0;
+// btn.style.opacity = 0;
 
 const renderError = function (msg) {
   countriesContainer.insertAdjacentHTML('beforeend', msg);
   countriesContainer.style.opacity = 1;
-};
+}; /*
 /* 
 const getCountryandNeighbour = function (country) {
   //AJAX call country 1
@@ -355,6 +355,7 @@ TEST DATA: Images in the img folder. Test the error handler by passing a wrong i
 
 GOOD LUCK 😀
 */
+/*
 let curImg;
 const imgContainer = document.querySelector('.images');
 // Wait fun
@@ -404,4 +405,62 @@ const loadImg = function () {
     .catch(err => console.error(err));
 };
 
-loadImg();
+loadImg(); */
+
+//////////////////////////////////
+// Await async  (new model of consuming a promises)
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  // btn.addEventListener('click', async function () {
+  try {
+    const pos = await getPosition();
+    const { latitude, longitude } = pos.coords;
+    const resGeo = await fetch(
+      `https://geocode.xyz/${latitude},${longitude}?geoit=json`
+    );
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+    const dataGeo = await resGeo.json();
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.country}`
+    );
+    city = dataGeo.city;
+    if (!res.ok) throw new Error('Problem getting country');
+    const data = await res.json();
+    renderCountry(data[0]);
+
+    return `You are in${city}, ${dataGeo.country}`;
+  } catch (err) {
+    renderError(`💥 ${err.message}`);
+    throw err; //  Zlapanie błedu przy wywołaniu funkcji- bez tego nawet jak wystapi bład to wypełni pronisa i zwróci undefined a z tym wyloguje nam błedy w konsoli
+  }
+  // });
+};
+
+console.log('1: Will get location');
+
+// const locationData = whereAmI();
+// console.log(locationData);
+/* 
+
+//consume a await promise with then catch method old
+whereAmI()
+  .then(city => console.log(`2: ${city}`))
+  .catch(err => console.error(`2: ${err.message}`))
+  .finally(() => console.log('3: Finished getting location'));
+ */
+
+//consuming promise with await and try catch method
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message}`);
+  }
+  console.log('3: Finished getting location');
+})();
