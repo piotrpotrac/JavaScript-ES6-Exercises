@@ -38,7 +38,17 @@ const renderCountry = function (data, className = '') {
 const renderError = function (msg) {
   countriesContainer.insertAdjacentHTML('beforeend', msg);
   countriesContainer.style.opacity = 1;
-}; /*
+};
+
+const getJSON = function (url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json();
+  });
+};
+
+/*
 /* 
 const getCountryandNeighbour = function (country) {
   //AJAX call country 1
@@ -441,7 +451,7 @@ const whereAmI = async function () {
   // });
 };
 
-console.log('1: Will get location');
+// console.log('1: Will get location');
 
 // const locationData = whereAmI();
 // console.log(locationData);
@@ -449,12 +459,13 @@ console.log('1: Will get location');
 
 //consume a await promise with then catch method old
 whereAmI()
-  .then(city => console.log(`2: ${city}`))
+.then(city => console.log(`2: ${city}`))
   .catch(err => console.error(`2: ${err.message}`))
   .finally(() => console.log('3: Finished getting location'));
  */
 
-//consuming promise with await and try catch method
+/* //consuming promise with await and try catch method
+console.log('1: Will get location');
 (async function () {
   try {
     const city = await whereAmI();
@@ -464,3 +475,81 @@ whereAmI()
   }
   console.log('3: Finished getting location');
 })();
+ */
+
+//////////////////////////
+//RunningPromises parallel
+/* 
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    // const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`);
+    // const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`);
+    // const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`);
+
+    // console.log([data1.capital, data2.capital, data3.capital]);
+
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v2/name/${c1}`),
+      getJSON(`https://restcountries.com/v2/name/${c2}`),
+      getJSON(`https://restcountries.com/v2/name/${c3}`),
+    ]);
+
+    console.log(data.map(d => d[0].capital));
+  } catch (err) {
+    console.error(`${err.message}`);
+  }
+};
+
+get3Countries('portugal', 'poland', 'austria');
+ */
+
+/////////////////////////////////
+// Others promise combinators  race, any, allSettled
+
+//Promise.race   zwraca pierwszy spelniony lub odrzucony promis
+
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.com/v2/name/italy`),
+    getJSON(`https://restcountries.com/v2/name/egypt`),
+    getJSON(`https://restcountries.com/v2/name/mexico`),
+  ]);
+  console.log(res[0]);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took too long!'));
+    }, sec);
+  });
+};
+
+Promise.race([getJSON(`https://restcountries.com/v2/name/italy`), timeout(100)])
+  .then(res => console.log(res[0]))
+  .catch(err => console.error(err));
+
+//Pronise.allSettled  zwraca  wszystkie wartosci promisow bez wzgledu czy zostaly spelnione czy nie
+
+Promise.allSettled([
+  Promise.resolve('Succes'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Succes'),
+]).then(res => console.log(res));
+
+Promise.all([
+  Promise.resolve('Succes'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Succes'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+// Promise.any   zwraca pierwszy spełniony promis
+Promise.any([
+  Promise.resolve('Succes'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Succes'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
