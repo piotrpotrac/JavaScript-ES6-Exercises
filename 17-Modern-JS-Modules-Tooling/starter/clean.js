@@ -16,7 +16,7 @@ const spendingLimits = Object.freeze({
   matilda: 100,
 });
 
-const getLimit = user => spendingLimits?.[user] ?? 0;
+const getLimit = (limits, user) => limits?.[user] ?? 0;
 
 //Pure function
 const addExpense = function (
@@ -31,7 +31,7 @@ const addExpense = function (
 
   // const limit = spendingLimits[user] ? spendingLimits[user] : 0;
 
-  return value <= getLimit(cleanUser)
+  return value <= getLimit(limits, cleanUser)
     ? [...state, { value: -value, description, user: cleanUser }]
     : state;
 };
@@ -47,25 +47,39 @@ const newBudget2 = addExpense(
 );
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
 
+const checkExpenses = function (state, limits) {
+  return state.map(entry => {
+    return entry.value < -getLimit(limits, entry.user)
+      ? { ...entry, flag: 'limit' }
+      : entry;
+  });
+
+  // for (const entry of newBudget3) {
+  //   if (entry.value < -getLimit(limits, entry.user)) entry.flag = 'limit';
+  // }
+};
+const finalBudget = checkExpenses(newBudget3, spendingLimits);
+console.log(finalBudget);
+
 console.log(newBudget3);
 
-const checkExpenses = function () {
-  for (const entry of budget) {
-    if (entry.value < -getLimit(entry.user)) entry.flag = 'limit';
-  }
-};
-checkExpenses();
+//Impure code becouse cl in last line
+const bigExpenses = function (state, bigLimit) {
+  // let output = '';
+  // for (const entries of budget) {
+  //   output +=
+  //     entries.value <= -bigLimit ? `${entries.description.slice(-2)} / ` : '';
+  //   // Emojis are 2 chars
+  // }
+  // output = output.slice(0, -2); // Remove last '/ '
+  // console.log(output);
 
-const logBigExpenses = function (bigLimit) {
-  let output = '';
-  for (const entries of budget) {
-    output +=
-      entries.value <= -bigLimit ? `${entries.description.slice(-2)} / ` : '';
-    // Emojis are 2 chars
-  }
-  output = output.slice(0, -2); // Remove last '/ '
-  console.log(output);
+  const bigExpenses = state
+    .filter(entry => entry.value <= -bigLimit)
+    .map(entry => entry.description.slice(-2))
+    .join(' / ');
+  // .reduce((str, cur) => `${str} / ${cur.description.slice(-2)}`, '');
+  console.log(bigExpenses);
 };
 
-console.log(budget);
-logBigExpenses(500);
+bigExpenses(finalBudget, 500);
