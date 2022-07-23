@@ -25,6 +25,8 @@ const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
     console.log(id);
+
+    if (!id) return;
     recipeView.renderSpinnner();
 
     // 1)Loading recipe
