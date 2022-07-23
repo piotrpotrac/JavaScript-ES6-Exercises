@@ -9,7 +9,7 @@ class ResultsView extends View {
   _generateMarkup() {
     return this._data.map(this._generateMarkupPreview).join('');
   }
-  // d
+
   _generateMarkupPreview(result) {
     return `
   <li class="preview">
